@@ -80,12 +80,15 @@ function swipe(event) {
     }
 }
 
-function updateCards() {
+async function updateCards() {
 
     const div = document.createElement('div');
     div.className = 'card';
 
-    let newQuote = pickRandomQuote();
+    
+    let newQuote = await pickRandomQuote();
+    console.log(newQuote);
+   
 
     wrapper.prepend(div);
 

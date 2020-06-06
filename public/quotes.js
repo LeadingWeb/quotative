@@ -5,23 +5,18 @@ let activeQuotes = [];
 
 
 
-function pickRandomQuote() {
-    let index = Math.floor(Math.random() * quotes.length);
-    return quotes[index];
+async function pickRandomQuote() {
+    const res = await fetch('/get-one');
+    const randomQuote = await res.json();
+    return randomQuote;
 }
 
 (async function loadQuotes() {
-    const res = await fetch('./assets/quotes.json');
-    quotes = await res.json();
+    const res = await fetch('/get-ten');
+    activeQuotes = await res.json();
 
-    buddha_quotes = quotes.filter(function (item) {
-        return item.author === "Buddha";
-    });
+
     
-
-    for (let i = 0; i < numberOfCards; i++) {
-        activeQuotes.push(pickRandomQuote());
-    }
     console.log(activeQuotes)
     CARDS = createCards(numberOfCards);
 
