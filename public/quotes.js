@@ -1,5 +1,5 @@
 let quotes;
-const numberOfCards = 4;
+const numberOfCards = 10;
 let activeQuotes = [];
 
 
@@ -21,6 +21,10 @@ async function pickRandomQuote() {
     CARDS = createCards(numberOfCards);
 
     CARDS[CARDS.length - 1].obj.addEventListener('animationend', (e) => {
+
+        let theQuote = CARDS[CARDS.length - 1].text;
+        console.log(theQuote);
+        sendSwipeData(theQuote);
     
         deleteCurrentCard();
         updateCards();
