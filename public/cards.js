@@ -3,6 +3,8 @@ let midpoint = Math.floor(screen.width/2);
 let CARDS = [];
 let colors = [];
 
+const fonts = ['Montserrat, sans-serif', 'Anton, sans-serif', 'Dancing Script, cursive', 'Lobster, cursive', 'Quicksand, sans-serif'];
+
 function createCards(n){
     let cards = [];
     for (let i = 0; i < n; i++) {
@@ -31,6 +33,8 @@ function createQuoteP(quote) {
 
     quoteP.style.fontSize = '2rem';
     quoteP.style.letterSpacing = '10px';
+    const index = Math.floor(Math.random() * fonts.length);
+    quoteP.style.fontFamily = fonts[index];
 
     quoteP.textContent = quote.text;
     return quoteP;
