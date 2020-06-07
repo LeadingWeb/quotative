@@ -1,5 +1,5 @@
 class Bubble{
-    constructor(d, a, i, n) {
+    constructor(d, a, i, n, afterAnimation) {
         this.x = Math.floor(Math.random() * 100);
         this.y = Math.floor(Math.random() * 100);
         this.d = d;
@@ -22,7 +22,8 @@ class Bubble{
         this.el.addEventListener('animationend', (e) => {
             this.el.remove();
             if(i == n-1){
-                window.location.replace("/first-login");
+                afterAnimation();
+                
             }
         })
     }

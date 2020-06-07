@@ -4,6 +4,7 @@ const $username = document.getElementById('username');
 const $password = document.getElementById('password');
 const $password2 = document.getElementById('password2');
 const $sbt  = document.querySelector('form button');
+let status = 0;
 
 let advanced = [$username, $password, $password2];
 advanced.forEach((el) => {
@@ -61,6 +62,12 @@ $sbt.addEventListener('click', (e) => {
                     .then((response) => response.json())
                     .then((data) => {
                         console.log("Success:", data);
+                        if(data.value == 1) {
+                            status = 1
+                        }else if(data.value == 0) {
+                            status = 0;
+                            
+                        }
                         
                     })
                     .catch((error) => {
@@ -89,7 +96,13 @@ function startLoadingAnimation() {
     for(let i =0; i < n; i++) {
         let width = 100 - i * i * 0.001;
         let a = 1 - i * 0.08;
-        bubbles[i] = new Bubble(width, a, i, n);
+        let what = function() {
+            if(status == 1) {
+                window.location.replace("/first-login");
+            }
+            
+        }
+        bubbles[i] = new Bubble(width, a, i, n, what);
 
     }
 }

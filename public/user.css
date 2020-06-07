@@ -4,6 +4,8 @@
     font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
+
+    
 }
 
 body{
@@ -35,6 +37,7 @@ form label{
     text-align: start;
     width: calc(100vw - 10%);
     text-transform: lowercase;
+    letter-spacing: 0.2rem;
 
    
     
@@ -58,6 +61,7 @@ form input{
     line-height: 1.7rem;
 
     background: #f7f7f7;
+    box-shadow: 2px 2px 2px #3f3f4411;
 
     transition: 0.5s ease-in-out;
 
@@ -88,11 +92,33 @@ form button {
     letter-spacing: 0.9rem;
 
     margin-top: 20px;
+    box-shadow: 2px 2px 2px #3f3f4411;
+    transition: 0.5s ease-in-out;
+}
+form button:active{
+    background: #3f3f44;
+    color: #f7f7f7;
+    box-shadow: -2px -2px -2px #3f3f4433;
 }
 h1 {
     font-size: 2rem;
     text-transform: lowercase;
     letter-spacing: 0.9rem;
+}
+
+#new-user-msg{
+    letter-spacing: 0.4rem;
+    padding: 10px 0;
+}
+#change{
+    letter-spacing: 0.4rem;
+    padding: 10px 0;
+}
+#change a {
+    text-decoration: none;
+    text-transform: lowercase;
+    color: #a97c73;
+
 }
 
 @keyframes register{

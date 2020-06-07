@@ -22,7 +22,7 @@ function startLoadingAnimation() {
     }
 }
 window.addEventListener('load', (e) => {
-    startLoadingAnimation();
+    //startLoadingAnimation();
 })
 
 
@@ -50,7 +50,7 @@ $sbt.addEventListener('click', (e) => {
         console.log("Success:", data);
         if(data.value == 1) {
             console.log(data.value)
-            window.location.replace("/welcome");
+            window.location.replace("/app");
         }else {
             $msg.innerHTML = data.msg;
         }

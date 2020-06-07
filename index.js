@@ -11,10 +11,12 @@ const db = monk(dbUrl);
 const dbNewQuotes = db.get('newQuotes');
 const dbOldQuotes = db.get('oldQuotes');
 const dbUsers = db.get('user');
+const dbCookies = db.get('cookies');
 
 const bcrypt = require('bcryptjs');
 const ejs = require('ejs');
 
+const cookieParser = require('cookie-parser');
 
 
 const server = app.listen(PORT, () => {
@@ -23,7 +25,7 @@ const server = app.listen(PORT, () => {
 
 
 app.use(express.json());
-
+app.use(cookieParser());
 app.set('view engine', 'ejs');
 
 
@@ -235,6 +237,163 @@ app.get('/first-login', (req, res) => {
     res.render('first-login');
 })
 
+app.post('/first-login', (req, res) => {
+    let email = req.body.email;
+    let password = req.body.password;
+
+    dbUsers.find()
+        .then(allUsers => {
+            const foundUser = allUsers.find(element => element.email == req.body.email);
+            if (foundUser == undefined) {
+                res.json({msg: 'There is no account for this email address, please <a href="/register"> register</a>', value: 0});
+            } else {
+                bcrypt.compare(password, foundUser.password, function(err, resu) {
+                    console.log(resu);
+                    if (err) {
+                        console.log(err)
+                    }
+                    if(resu) {
+                        //res.render('app');
+
+                        
+                        bcrypt.genSalt(10, (err, salt) => {
+                            bcrypt.hash(foundUser.password, salt, (err, hash) => {
+
+
+                                let newCookie = {
+                                    username: foundUser.username,
+                                    secret: hash
+                                };
+
+                                let obj = {
+                                    cookie: newCookie,
+                                    user: foundUser,
+                                    sessions: []
+                                };   
+
+                                dbCookies.insert(obj)
+                                    .then(createdCookie => {
+                                        console.log(createdCookie);
+                                        
+                                        res.cookie(foundUser.username, `${newCookie.secret}`);
+
+                                        console.log(`User ${foundUser.name} logged in`);
+
+                                        res.json({msg: `Hi ${foundUser.name}`, value: 1});
+
+                                    })
+                            });
+                        })
+
+                        
+                        
+                    }else {
+                        res.json({msg: `Wrong Password`, value: 0});
+                    }
+                });
+            }
+
+        })
+})
+
+
+
+
+
+app.get('/login', (req, res) => {
+    res.render('login');
+})
+
+app.post('/login', (req, res) => {
+    let email = req.body.email;
+    let password = req.body.password;
+
+    dbUsers.find()
+        .then(allUsers => {
+            const foundUser = allUsers.find(element => element.email == req.body.email);
+            if (foundUser == undefined) {
+                res.json({msg: 'There is no account for this email address, please <a href="/register"> register</a>', value: 0});
+            } else {
+                bcrypt.compare(password, foundUser.password, function(err, resu) {
+                    console.log(resu);
+                    if (err) {
+                        console.log(err)
+                    }
+                    if(resu) {
+                        //res.render('app');
+
+                        console.log(req.cookies[`${foundUser.username}`]);
+                        dbCookies.find()
+                            .then(cookies => {
+                                const foundCookie = cookies.find(element => element.cookie.secret == req.cookies[`${foundUser.username}`])
+
+                                if (foundCookie != undefined) {
+                                    
+                                    let cookieNames = Object.keys(req.cookies);
+                                    let cookieName = cookieNames.find(element => element == foundCookie.cookie.username);
+                                    if(cookieName != undefined) {
+                                        //Logged in via cookie
+
+                                        console.log(`User ${foundUser.name} logged in`);
+
+                                        res.json({msg: `Hi ${foundUser.name}`, value: 1});
+
+                                    }
+                                } else {
+
+                                    bcrypt.genSalt(10, (err, salt) => {
+                                        bcrypt.hash(foundUser.password, salt, (err, hash) => {
+            
+            
+                                            let newCookie = {
+                                                username: foundUser.username,
+                                                secret: hash
+                                            };
+
+                                            let obj = {
+                                                cookie: newCookie,
+                                                user: foundUser,
+                                                sessions: []
+                                            };   
+
+                                            dbCookies.insert(obj)
+                                                .then(createdCookie => {
+                                                    console.log(createdCookie);
+                                                    
+                                                    res.cookie(foundUser.username, `${newCookie.secret}`);
+
+                                                    console.log(`User ${foundUser.name} logged in`);
+            
+                                                    res.json({msg: `Hi ${foundUser.name}`, value: 1});
+            
+                                                })
+                                        });
+                                    })
+
+                                }
+                            })
+
+                        
+                        
+
+                        
+                        
+                    }else {
+                        res.json({msg: `Wrong Password`, value: 0});
+                    }
+                });
+            }
+
+        })
+})
+
+
+app.get('/app', (req, res) => {
+    res.render('app');
+})
+app.get('/welcome', (req, res) => {
+    res.render('welcome');
+})
 
 function validateData(data) {
     return data;
