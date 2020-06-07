@@ -94,3 +94,10 @@ h1 {
     text-transform: lowercase;
     letter-spacing: 0.9rem;
 }
+
+@keyframes register{
+    100%{
+        top: -20%;
+        opacity: 0.1;
+    }
+}

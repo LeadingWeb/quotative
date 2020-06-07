@@ -10,7 +10,7 @@ const db = monk(dbUrl);
 
 const dbNewQuotes = db.get('newQuotes');
 const dbOldQuotes = db.get('oldQuotes');
-const dbUsers = db.get('users');
+const dbUsers = db.get('user');
 
 const bcrypt = require('bcryptjs');
 const ejs = require('ejs');
@@ -168,19 +168,24 @@ app.get('/register', (req, res) => {
 
 app.post('/register', (req, res) => {
 
+    console.log(req.body, 'REQ.BODY');
 
 
 
     dbUsers.find()
         .then(allUsers => {
-            const foundMail = allUsers.find(element => element.email = req.body.email);
-            //console.log(foundMail);
-            const foundUser = allUsers.find(element => element.username = req.body.username);
-            //console.log(foundUser);
+            console.log(allUsers, 'ALL USERS');
+            const foundMail = allUsers.find(element => element.email == req.body.email);
+            console.log(foundMail, 'FOUND MAIL');
+            const foundUser = allUsers.find(element => element.username == req.body.username);
+            console.log(foundUser, 'FOUND USER');
+
+            
 
             if(foundMail != undefined || foundUser != undefined) {
-                res.send('This mail or username already exists');
-            }else {
+
+                res.json({msg: 'Username or Email already exist!', value: 0});
+            }else if (foundMail == undefined && foundUser == undefined) {
 
 
                 let quotesBlueprint = (() => {
@@ -207,20 +212,27 @@ app.post('/register', (req, res) => {
                 bcrypt.genSalt(10, (err, salt) => {
                     bcrypt.hash(newUser.password, salt, (err, hash) => {
                         newUser.password = hash;
+                        console.log(newUser);
                         
                         dbUsers.insert(newUser)
                             .then(createdUser => {
                                 console.log(createdUser)
-                                res.render('login');
+                                res.json({msg: 'registration was succesfull', value: 1});
                             })
                     });
                 })
 
             }
+            
         })
     
     
 
+})
+
+
+app.get('/first-login', (req, res) => {
+    res.render('first-login');
 })
 
 
