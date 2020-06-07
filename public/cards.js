@@ -35,7 +35,15 @@ function createCards(n) {
 function createQuoteP(quote) {
   const quoteP = document.createElement("p");
 
-  quoteP.style.fontSize = "2rem";
+  if (quote.length < 40) {
+    quoteP.style.fontSize = "2.5rem";
+  } else if(quote.length < 100 && quote.length >= 40) {
+    quoteP.style.fontSize = "2rem";
+  } else {
+    quoteP.style.fontSize = "1.6rem";
+  }
+
+  
   quoteP.style.letterSpacing = "10px";
   const index = Math.floor(Math.random() * fonts.length);
   quoteP.style.fontFamily = fonts[index];
@@ -47,6 +55,8 @@ function createAuthorP(quote) {
   const authorP = document.createElement("p");
 
   authorP.style.letterSpacing = "0.7rem";
+  authorP.style.textDecoration = 'underline'
+  authorP.className = 'author'
   authorP.textContent = quote.author;
   return authorP;
 }
@@ -59,26 +69,57 @@ function deleteCurrentCard() {
   console.log(CARDS);
   element.remove();
   activeQuotes.splice(activeQuotes.length - 1, 1);
+  lastX = undefined;
+  lastY = undefined;
+  secondX = undefined;
+  secondY = undefined;
+  thirdX = undefined;
+  thirdY = undefined;
+  fourthX = undefined;
+  forthY = undefined;
 }
-
+let lastY, secondY, thirdY, fourthY;
+let lastX, secondX, thirdX, fourthX;
 
 function swipe(event) {
   midpoint = Math.floor(screen.width / 2);
+  midpointY = Math.floor(screen.height / 2);
   let touch = event.targetTouches[0];
   let pX = touch.pageX;
+  let pY = touch.pageY;
+  fourthY = thirdY;
+  thirdY = secondY;
+  secondY = lastY;
+  lastY = pY;
+  fourthX = thirdX;
+  thirdX = secondX;
+  secondX = lastX;
+  lastX = pX;
 
-  if (pX > midpoint) {
-    CARDS[CARDS.length - 1].obj.style.animation = "swipe-right 0.5s";
-    currentLike = 1;
+  let buffer = 1.5;
+  if(secondY != undefined && thirdY != undefined && fourthY != undefined) {
 
+    distX = fourthX - lastX;
+    distY = fourthY - lastY;
+    //console.log(distY);
     
-
-  } else {
-
-    CARDS[CARDS.length - 1].obj.style.animation = "swipe-left 0.5s";
-    currentLike = 0;
+      if (distY > 0){
+          if(Math.pow(distY, 2) > Math.pow(distX, 2)) {
+            CARDS[CARDS.length - 1].obj.style.animation = "swipe-up 0.5s";
+            currentLike = 2;
+          }
+      }else if (pX > midpoint) {
+        CARDS[CARDS.length - 1].obj.style.animation = "swipe-right 0.5s";
+        currentLike = 1;
     
-
+        
+    
+      } else if (pX < midpoint) {
+    
+        CARDS[CARDS.length - 1].obj.style.animation = "swipe-left 0.5s";
+        currentLike = 0;
+    
+      }
 
   }
 }

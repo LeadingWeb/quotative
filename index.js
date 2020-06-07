@@ -129,12 +129,12 @@ app.post('/swipe', (req, res) => {
 
             
             dbNewQuotes.findOneAndDelete({_id: foundQuote._id}).then((doc) => {
-                console.log(doc);
+                //console.log(doc);
                 
                 dbNewQuotes
                 .insert(reQuote)
                 .then(createdQuote => {
-                    console.log(createdQuote);
+                    //console.log(createdQuote);
                     res.send(createdQuote);
                 })
                 

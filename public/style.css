@@ -40,6 +40,31 @@ body{
     
 }
 
+.menu {
+    position: fixed;
+
+    width: 25rem;
+    height: 100px;
+    /*
+    width: calc(100% - 0.5px);
+    height: calc(100vh - 702px);
+    */
+    box-sizing: border-box;
+    background: #f7f7f7;
+    border-top: 0.5px solid #3f3f44;
+    border-top-right-radius: 10%;
+
+    transition: 0.5s ease-in-out;
+}
+
+.author{
+    text-transform: lowercase;
+}
+
+
+
+
+/*animation*/
 
 @keyframes swipe-right{
     100%{
@@ -49,5 +74,10 @@ body{
 @keyframes swipe-left{
     100%{
         left: -100%;
+    }
+}
+@keyframes swipe-up{
+    100%{
+        top: -100%;
     }
 }
