@@ -10,11 +10,26 @@ const db = monk(dbUrl);
 
 const dbNewQuotes = db.get('newQuotes');
 const dbOldQuotes = db.get('oldQuotes');
+const dbUsers = db.get('users');
+
+const bcrypt = require('bcryptjs');
+const ejs = require('ejs');
+
+
 
 const server = app.listen(PORT, () => {
     console.log(`Listening on Port ${PORT}`)
 });
+
+
 app.use(express.json());
+
+app.set('view engine', 'ejs');
+
+
+
+
+
 
 function pickRandomQuotes(n) {
     
@@ -141,38 +156,74 @@ app.post('/swipe', (req, res) => {
             });
             
 
-
-
-
         })
-        
-        //let resquote = doc;
-        /*
-        if(resquote.likes = undefined) {
-            resquote.likes = [];
-
-        }*/
-
-        /*
-        let likeObj = {
-            user: user,
-            like: like,
-            date: new Date()
-        };
-        resquote.likes.push(likeObj);
-        dbNewQuotes.findOneAndDelete({quote: theQuote}).then((doc) => {
-            dbNewQuotes
-            .insert(resquote)
-            .then(createdQuote => {
-                console.log(createdQuote);
-                res.send(createdQuote);
-            })
-        });
-        */
-    
-
-
-
-    
-    
 });
+
+
+
+
+app.get('/register', (req, res) => {
+    res.render('register');
+});
+
+app.post('/register', (req, res) => {
+
+
+
+
+    dbUsers.find()
+        .then(allUsers => {
+            const foundMail = allUsers.find(element => element.email = req.body.email);
+            //console.log(foundMail);
+            const foundUser = allUsers.find(element => element.username = req.body.username);
+            //console.log(foundUser);
+
+            if(foundMail != undefined || foundUser != undefined) {
+                res.send('This mail or username already exists');
+            }else {
+
+
+                let quotesBlueprint = (() => {
+                    let arr = [];
+                    for(let i = 0; i < 3; i++) {
+                        arr[i] = [];
+            
+                    }
+                    return arr;
+                })
+            
+                
+                let newUser = {
+                    name: validateData(req.body.name),
+                    email: validateData(req.body.email),
+                    username: validateData(req.body.username),
+                    password: validateData(req.body.password),
+                    likes: quotesBlueprint(),
+                    date: new Date(),
+                    quotes: []
+                };
+            
+            
+                bcrypt.genSalt(10, (err, salt) => {
+                    bcrypt.hash(newUser.password, salt, (err, hash) => {
+                        newUser.password = hash;
+                        
+                        dbUsers.insert(newUser)
+                            .then(createdUser => {
+                                console.log(createdUser)
+                                res.render('login');
+                            })
+                    });
+                })
+
+            }
+        })
+    
+    
+
+})
+
+
+function validateData(data) {
+    return data;
+}
