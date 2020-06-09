@@ -22,20 +22,20 @@
             
             
             <label for="name">Name</label>
-            <input type="text" name="name" id="name" required>
+            <input type="text" name="name" id="name" required minlength="4" maxlength="15">
 
             <label for="email">Email</label>
-            <input type="email" name="email" id="email" required>
+            <input type="email" name="email" id="email" required minlength="7">
             
             <label for="username">Username</label>
-            <input type="text" name="username" id="username" required>           
+            <input type="text" name="username" id="username" required >           
             
             
             <label for="password">Password</label>
-            <input type="password" name="password" id="password" required>
+            <input type="password" name="password" id="password" required minlength="6">
             
             <label for="password2">Retype Password</label>
-            <input type="password" name="password2" id="password2" required>
+            <input type="password" name="password2" id="password2" required minlength="6">
             
             <button type="submit">Submit</button>
             

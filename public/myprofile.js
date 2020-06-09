@@ -134,9 +134,9 @@ $sbt.addEventListener('click', (e) => {
                 drawQoute(myQuotes[i].quote);
             }
             
-            console.log(quotesLi);
+            //console.log(quotesLi);
             
-            console.log(myQuotes);
+            //console.log(myQuotes);
             $quote.value = '';
             
             
@@ -179,34 +179,46 @@ function createMoreBtnQuotes() {
     $myquotes.appendChild($newBtnLi);
     $newBtnLi.addEventListener('click', (e) => {
         $myquotes.innerHTML = '';
-        console.log(quoteActivePage, quotePagesMax);
+        quoteActivePage++;
         
+        if(quoteActivePage >= quotePagesMax) {
+            quoteActivePage = 0;
+        }
         loadNextTenQuotes();
     })
 }
 function loadNextTenQuotes() {
-    $myquotes.innerHTML = '';
-    quotesLi = [];
+    
+    if(quoteActivePage == 0) {
+        for(let i = 0; i < 10; i++) {
 
-    if(quoteActivePage < quotePagesMax) {
-        quoteActivePage++;
-        let start = quoteActivePage * perPage;
-        let max = start + perPage;
-        for(let i = start; i < max +1; i++) {
+            
             drawQoute(myQuotes[i].quote);
+            
+            
         }
         createMoreBtnQuotes();
-        
-    } else {
-        quoteActivePage = 0;
-        
-        let start = quoteActivePage * perPage;
-        let max = start + perPage;
-        for(let i = start; i < max +1; i++) {
-            drawQoute(myQuotes[i].quote);
+    }else if(quoteActivePage < quotePagesMax) {
+        let start = (quoteActivePage * perPage) -1;
+        let end = start + perPage +1;
+        for(let i = start; i < end; i++) {
+            if(myQuotes[i] == undefined)break;
+            
+            drawQoute( myQuotes[i].quote);
+            
+        }
+        createMoreBtnQuotes();
+    }else {
+        let start = quoteActivePage * perPage -1;
+        let end = myLibary.length;
+        for(let i = start; i < end; i++) {
+            
+            drawLibary( myLibary[i].quote, myLibary[i].author);
+            
         }
         createMoreBtnQuotes();
     }
+    
 }
 
 

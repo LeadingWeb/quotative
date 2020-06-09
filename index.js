@@ -158,7 +158,7 @@ app.post('/swipe', (req, res) => {
     let theQuote = req.body.quote;
     let quoteAuthor = req.body.author;
     let like = Math.floor(req.body.like);
-    console.log('QUOTE AUTHOR:   ', quoteAuthor);
+    //console.log('QUOTE AUTHOR:   ', quoteAuthor);
     
     let cookieNames = Object.keys(req.cookies);
     //console.log('COOKIE NAMES ON CLIENT: ',cookieNames);
