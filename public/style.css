@@ -45,6 +45,7 @@ body{
 
 .menu {
     position: fixed;
+    bottom: 0%;
 
     width: 90vw;
     height: 100px;
@@ -73,6 +74,9 @@ body{
     
 
    
+}
+.theQuote {
+    font-size: 1.8rem;
 }
 #avatar-p{
     font-size: 2rem;
@@ -105,5 +109,33 @@ body{
 @keyframes swipe-up{
     100%{
         top: -100%;
+    }
+}
+
+
+@media only screen and (max-height: 700px) {
+
+    .card{
+        height: 500px;
+        
+    }
+    .card p {
+        font-size: 80%;
+    }
+    .theQuote{
+        font-size: 1.8rem;
+    }
+}
+@media only screen and (min-height: 1100px) {
+
+    .card{
+        height: 800px;
+        
+    }
+    .card p{
+        font-size: 500%;
+    }
+    .theQuote {
+        font-size: 3rem;
     }
 }

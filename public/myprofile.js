@@ -5,6 +5,8 @@ const $libary = document.getElementById('libary');
 const $myquotes = document.getElementById('myquotes');
 const $message = document.getElementById('message');
 
+const $username = document.getElementById('hi');
+
 let quotesLi = [];
 let libaryLi = [];
 
@@ -303,28 +305,41 @@ function createMoreBtnLibary() {
 }
 
 
+let logoutState = false;
+let logoutEl;
 
-/*
-function loadNextTenLibary() {
-    $libary.innerHTML = '';
-    libaryLi = [];
-    if(libaryActivePage < libaryPagesMax) {
-        libaryActivePage++;
-        
-        let start = libaryActivePage * perPage;
-        let max = start + perPage;
-        for(let i = start; i < max +1; i++) {
-            drawLibary(myLibary[i].quote, myLibary[i].author);
-        }
-        createMoreBtnLibary();
-        
+//Logout
+$username.addEventListener('click', (e) => {
+    if (!logoutState) {
+        startLogoutAnimation();
+        logoutState = true;
     } else {
-        quoteActivePage = 0;
-        let start = quoteActivePage * perPage;
-        let max = start + perPage;
-        for(let i = start; i < max +1; i++) {
-            drawLibary(myLibary[i].quote, myLibary[i].author);
-        }
-        createMoreBtnLibary();
+        $username.removeChild(logoutEl);
+        logoutState = false;
     }
-}*/
+    
+})
+
+function startLogoutAnimation() {
+    startLoadingAnimation();
+    const $logout = document.createElement('div');
+    const $msg = document.createElement('p');
+    $msg.textContent = 'Do you want to Logout?';
+    $msg.style.fontSize = '1rem';
+    $msg.style.padding = '10px 0';
+    const $btn = document.createElement('p');
+    $btn.innerHTML = 'Logout';
+    $btn.style.fontSize = '2rem';
+    $btn.style.textAlign = 'center';
+    $btn.style.padding = '20px 0';
+    $logout.appendChild($msg); 
+    $logout.appendChild($btn);
+    $username.appendChild($logout);
+    logoutEl = $logout;
+
+    $btn.addEventListener('click', (e) => {
+        deleteAllCookies(window);
+        window.location.replace("/login");
+        
+    })
+}

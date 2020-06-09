@@ -36,12 +36,13 @@ function createQuoteP(quote) {
   const quoteP = document.createElement("p");
 
   if (quote.length < 40) {
-    quoteP.style.fontSize = "2.5rem";
+    quoteP.style.fontSize = "2.5em";
   } else if(quote.length < 100 && quote.length >= 40) {
-    quoteP.style.fontSize = "2rem";
+    quoteP.style.fontSize = "2em";
   } else {
-    quoteP.style.fontSize = "1.6rem";
+    quoteP.style.fontSize = "1.6  em";
   }
+  quoteP.className = 'theQuote';
 
   
   quoteP.style.letterSpacing = "10px";

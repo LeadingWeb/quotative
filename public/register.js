@@ -41,7 +41,7 @@ $sbt.addEventListener('click', (e) => {
                 }, 3000);
             }else {
                 username = $username.value;
-                console.log(name, email, username, $password.value, $password2.value);
+                
                 
                 
                 if($password.value == $password2.value) {
@@ -63,7 +63,7 @@ $sbt.addEventListener('click', (e) => {
                         })
                         .then((response) => response.json())
                         .then((data) => {
-                            console.log("Success:", data);
+                            //console.log("Success:", data);
                             if(data.value == 1) {
                                 startLoadingAnimation();
                                 status = 1
