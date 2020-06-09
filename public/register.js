@@ -4,6 +4,7 @@ const $username = document.getElementById('username');
 const $password = document.getElementById('password');
 const $password2 = document.getElementById('password2');
 const $sbt  = document.querySelector('form button');
+const $message = document.getElementById('message');
 let status = 0;
 
 let advanced = [$username, $password, $password2];
@@ -11,27 +12,25 @@ advanced.forEach((el) => {
     el.style.display = 'none';
 })
 
-$email.addEventListener('change', (e) => {
+$email.addEventListener('focus', (e) => {
     advanced.forEach((el) => {
         el.style.display = 'block';
     })
 })
 
 $sbt.addEventListener('click', (e) => {
-    console.log(e.target);
+    
     let name, email, username, password;
     
     e.preventDefault();
     if(checkForXSS($name.value)) {
         setTimeout(() => {
-            alert('Please Stop messin with us ;)');
         }, 3000);
     }else {
         name = $name.value;
         
         if(checkForXSS($email.value)) {
             setTimeout(() => {
-                alert('Please Stop messin with us ;)');
             }, 3000);
         }else {
             email = $email.value;
@@ -39,41 +38,59 @@ $sbt.addEventListener('click', (e) => {
             
             if(checkForXSS($username.value)) {
                 setTimeout(() => {
-                    alert('Please Stop messin with us ;)');
                 }, 3000);
             }else {
                 username = $username.value;
+                console.log(name, email, username, $password.value, $password2.value);
                 
                 
                 if($password.value == $password2.value) {
-                    password = $password.value;
+                    if($name.value.length > 5 && $email.value.length > 5 && $username.value.length > 5 && $password.value.length > 5) {
+
+                        password = $password.value;
+                        
                     
-                    startLoadingAnimation();
-                    
-                    const data = {name, email, username, password};
-                    //console.log(data);
-                    fetch('/register', {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify(data),
-                    })
-                    .then((response) => response.json())
-                    .then((data) => {
-                        console.log("Success:", data);
-                        if(data.value == 1) {
-                            status = 1
-                        }else if(data.value == 0) {
-                            status = 0;
+                        startLoadingAnimation();
+                        
+                        const data = {name, email, username, password};
+                        //console.log(data);
+                        fetch('/register', {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify(data),
+                        })
+                        .then((response) => response.json())
+                        .then((data) => {
+                            console.log("Success:", data);
+                            if(data.value == 1) {
+                                startLoadingAnimation();
+                                status = 1
+                            }else if(data.value == 0) {
+                                status = 0;
+                                
+                            }
+                            $message.textContent = data.msg;
                             
-                        }
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                            
+                        });
+
+
+
+                    }else {
                         
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                        
-                    });
+                        $message.textContent = 'Please use at least 6 letters!';
+                    }
+
+                    
+                    
+                }else {
+                    
+                    $message.textContent = "Your Passwords don't match";
                 }
                 
                 
@@ -109,7 +126,12 @@ function startLoadingAnimation() {
 
 
 function checkForXSS(input) {
-    return false;
+    const xss = validateXSS(input);
+    console.log(xss);
+    if(xss != 0) {
+        $message.textContent = 'Please stop messing with us!';
+        return true;
+    } else return false;
 }
 
 

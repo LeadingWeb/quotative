@@ -114,6 +114,10 @@ h1 {
     color: #a97c73;
 
 }
+#message{
+    padding-top: 15px;
+    letter-spacing: 0.3rem;
+}
 
 @keyframes register{
     100%{

@@ -1,3 +1,6 @@
+javascript
+<script>
+<script> </script>
 <svg onload=alert(1)>
 "><svg onload=alert(1)//
 "onmouseover=alert(1)//

@@ -112,13 +112,20 @@ $back.forEach(back => {
     })
 })
 
-
+let XSSTries = 0;
 $sbt.addEventListener('click', (e) => {
     e.preventDefault();
     const quote = $quote.value;
-    if(validateXSS(quote)) {
+    if(validateXSS(quote) != 0) {
+        if(XSSTries > 5) {
+            setTimeout(() => {
+
+            }, XSSTries * 1000);
+        }
         console.log('XSS!!')
-        $message.textContent = 'Please wtrite a valid message';
+        $message.textContent = 'Please write a valid message!';
+        XSSTries++;
+        $quote.value = '';
     }else if (!validateLength(quote, 6)) {
         $message.textContent = 'Pleas use at least 6 letters';
     } else {

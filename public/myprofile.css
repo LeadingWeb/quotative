@@ -147,6 +147,12 @@ ul {
 }
 
 
+
+#message{
+    padding: 15px 0;
+    letter-spacing: 0.3rem;
+}
+
 @keyframes register{
     100%{
         top: -20%;

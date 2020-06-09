@@ -1,12 +1,11 @@
 let payload;
 (async function getPayload(){
-    const res = await fetch('/assets/xss-payload-list.txt');
+    const res = await fetch('/assets/list.txt');
     const list = await res.text();
     payload = list.split('\n');
     //console.log(payload);
     
-    const text =  validateXSS('\'-alert(1)//');
-    console.log(text);
+
 })();
 
 function validateLength(input, n) {
@@ -16,7 +15,7 @@ function validateLength(input, n) {
 
 function validateXSS(input) {
     let XSS = [];
-    console.log(payload.length);
+    //console.log(payload.length);
 
     for(let i = 0; i < payload.length; i++) {
         if(payload[i] == input || payload[i].trim() == input.trim()) {
