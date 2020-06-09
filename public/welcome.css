@@ -1,0 +1,21 @@
+.wrapper {
+    height: 100%;
+}
+
+#hi{
+    font-size: 4rem;
+    font-family: 'Anton', sans-serif;
+    display: block;
+}
+.simple-p{
+    letter-spacing: 0.3rem;
+    font-size: 1.4rem;
+    position: relative;
+    top: 10%;
+
+}
+#start-app{
+    font-size: 3rem;
+    font-weight: 300;
+    color: #a97c73;
+}

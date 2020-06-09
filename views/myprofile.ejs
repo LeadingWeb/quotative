@@ -1,0 +1,59 @@
+
+
+
+<head>
+    <link rel="stylesheet" href="myprofile.css">
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>welcome!</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./assets/Bubble.js"></script>
+</head>
+
+<body>
+    
+    <div class="wrapper">
+        
+        <h1><span id="hi"><%= username %></span> Hi <%= name %>!</h1>
+        <span class="back">&lt;</span>
+
+        <form action="" id="post-form">
+            <h3>share an idea.</h3>
+            <textarea name="post" id="post" cols="30" rows="10"></textarea>
+            <button type="submit">Submit</button>
+            
+        </form>
+        
+
+        <div class="myquotes">
+
+            <h3>My Quotes</h3>
+
+            <ul id="myquotes">
+                
+            </ul>
+        </div>
+
+        
+
+        <div class="libary">
+
+            <h3>My Libary</h3>
+
+            <ul id="libary">
+        
+            </ul>
+        </div>
+        
+        <span class="back">&lt;</span>
+    </div>
+    
+
+    <script src="myprofile.js" defer></script>
+    
+</body>
+
+
+

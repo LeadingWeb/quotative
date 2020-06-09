@@ -23,8 +23,9 @@ async function pickRandomQuote() {
     CARDS[CARDS.length - 1].obj.addEventListener('animationend', (e) => {
 
         let theQuote = CARDS[CARDS.length - 1].text;
+        let theAuthor = CARDS[CARDS.length - 1].author;
         console.log(theQuote);
-        sendSwipeData(theQuote);
+        sendSwipeData(theQuote, theAuthor);
     
         deleteCurrentCard();
         updateCards();
