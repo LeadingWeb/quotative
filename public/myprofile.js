@@ -3,6 +3,7 @@ const $quote = document.querySelector('form textarea');
 const $sbt = document.querySelector('form button');
 const $libary = document.getElementById('libary');
 const $myquotes = document.getElementById('myquotes');
+const $message = document.getElementById('message');
 
 let quotesLi = [];
 let libaryLi = [];
@@ -56,11 +57,15 @@ const perPage = 10;
     $libary. innerHTML = '';
     libaryLi = [];
     libaryPagesMax = Math.ceil(myQuotes.length / 10);
-    
-    if(myLibary.length <= 10) {
+    if(myLibary.length == 0) {
+
+    }else if(myLibary.length <= 10 && myLibary.length > 0) {
         for(let i = 0; i < 10; i++) {
             quoteActivePage = 0;
-            drawLibary(await myLibary[i].quote, await myLibary[i].author);
+            if(myLibary[i] != undefined && myLibary[i] != null) {
+                drawLibary(await myLibary[i].quote, await myLibary[i].author);
+            }
+            
             
         }
     }else {
@@ -110,10 +115,15 @@ $back.forEach(back => {
 
 $sbt.addEventListener('click', (e) => {
     e.preventDefault();
-    
-    
     const quote = $quote.value;
-    const data = {quote: quote};
+    if(validateXSS(quote)) {
+        console.log('XSS!!')
+        $message.textContent = 'Please wtrite a valid message';
+    }else if (!validateLength(quote, 6)) {
+        $message.textContent = 'Pleas use at least 6 letters';
+    } else {
+        $message.textContent = '';
+        const data = {quote: quote};
     
     fetch("/post-quote", {
         method: "POST",
@@ -150,6 +160,11 @@ $sbt.addEventListener('click', (e) => {
     .catch((error) => {
         console.error("Error:", error);
     });
+
+
+    }
+    
+    
     
 })
 
@@ -163,11 +178,15 @@ function drawQoute(quote) {
     
 }
 function drawLibary(quote, author) {
-    const $newQuoteLi = document.createElement('li');
-    $newQuoteLi.innerHTML = `${quote} <br> <span id='author-libary'>${author}</span>`;
-    $newQuoteLi.className = 'libary-li';
-    libaryLi.push($newQuoteLi);
-    $libary.appendChild($newQuoteLi);
+    if(quote != undefined && quote != null) {
+        const $newQuoteLi = document.createElement('li');
+        $newQuoteLi.innerHTML = `${quote} <br> <span id='author-libary'>${author}</span>`;
+        $newQuoteLi.className = 'libary-li';
+        libaryLi.push($newQuoteLi);
+        $libary.appendChild($newQuoteLi);
+
+    }
+    
     
     
 }

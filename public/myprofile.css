@@ -6,20 +6,20 @@
     padding: 0;
     background-color: #f7f7f7;
     color: #3f3f44;
+    box-sizing: border-box;
 
     
 }
 
-body{
-    
-
-}
+html, body {
+    overflow-x: hidden;
+ }
 
 h1 {
     font-size: 2rem;
     text-transform: lowercase;
     letter-spacing: 0.9rem;
-    margin: 20px 0;
+
 }
 #hi{
     font-size: 4rem;
@@ -29,11 +29,9 @@ h1 {
 
 
 .wrapper{
-    
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
+    width: 90%;
+    margin: 0 auto;
+    overflow-x: hidden;
 }
 
 
@@ -44,14 +42,14 @@ h1 {
     align-items: center;
     height: 300px;
 
-    margin: 15px 0;
+
 
 }
 #post-form textarea{
     resize: none;
     padding: 10px;
     font-size: 1.1rem;
-    width: 95%;
+
 
     border-top-right-radius: 7%;
     border: none;
@@ -80,7 +78,7 @@ h3{
     font-weight: 400;
     font-style: italic;
     text-align: start;
-    width: calc(100vw - 10%);
+    
     text-transform: lowercase;
     letter-spacing: 0.2rem;
     transition: 0.5s ease-in-out;
@@ -110,9 +108,9 @@ form button:active{
 }
 
 .myquotes, .libary {
-    padding: 10px;
-    width: 90%;
     margin: 10px auto;
+
+    
 }
 
 .back{
@@ -126,6 +124,7 @@ form button:active{
 
 
 li{
+    
     list-style: none;
     padding: 15px 10px;
     font-size: 1.3rem;
@@ -141,6 +140,7 @@ li:nth-child(even){
 }
 
 ul {
+
     border-radius: 6%;
     border: none;
     border-left: 0.5px solid #3f3f4477;
