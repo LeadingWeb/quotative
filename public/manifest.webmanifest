@@ -1,0 +1,21 @@
+{
+    "name": "QUOTATIVE",
+    "short_name": "quotative",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#f7f7f7",
+    "description": "Share your idea with the world or, swipe left or right to give your opinion on the quotes of others!",
+    "icons": [
+        {
+            "src": "/assets/pic/logo512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "/assets/pic/logo192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+ 
+        }
+    ]
+}

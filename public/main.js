@@ -16,4 +16,17 @@ window.addEventListener('load', (e) => {
     name = $name.textContent;
     let firstL = username[0];
     $avatar.innerHTML = `<a href='/myprofile' id='avatar-p'>${username}.</a>`;
+    registerSW();
 })
+
+async function registerSW() {
+    if('serviceWorker' in navigator) {
+        try {
+            await navigator.serviceWorker.register('./sw.js');
+
+        }
+        catch(e) {
+            console.log('SW registration failed');
+        }
+    }
+}
