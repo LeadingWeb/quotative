@@ -46,9 +46,9 @@ const perPage = 10;
     
     
     
-    console.log(quotesLi);
+    // console.log(quotesLi);
     
-    console.log(myQuotes)
+    // console.log(myQuotes)
     
     
 })();
@@ -81,7 +81,7 @@ const perPage = 10;
     
     
     
-    console.log(myLibary);
+    // console.log(myLibary);
     
     
 })();
@@ -105,7 +105,7 @@ function startLoadingAnimation() {
 }
 
 $back.forEach(back => {
-    console.log(back)
+    // console.log(back)
     back.addEventListener('click', (e) => {
         
         startLoadingAnimation();
@@ -118,14 +118,14 @@ let XSSTries = 0;
 $sbt.addEventListener('click', (e) => {
     e.preventDefault();
     const quote = $quote.value;
-    console.log(quote);
+    // console.log(quote);
     if(validateXSS(quote) != 0) {
         if(XSSTries > 5) {
             setTimeout(() => {
                 
             }, XSSTries * 1000);
         }
-        console.log('XSS!!')
+        // console.log('XSS!!')
         $message.textContent = 'Please write a valid message!';
         XSSTries++;
         $quote.value = '';
@@ -134,7 +134,7 @@ $sbt.addEventListener('click', (e) => {
     } else {
         $message.textContent = '';
         const data = {quote};
-        console.log(data);
+        // console.log(data);
         
         fetch("/post-quote", {
             method: "POST",
@@ -145,7 +145,7 @@ $sbt.addEventListener('click', (e) => {
         })
         .then((response) => response.json())
         .then((data) => {
-            console.log("Success:", data);
+            // console.log("Success:", data);
             
             async function loadMyQuotes() {
                 const res = await fetch('/my-quotes');

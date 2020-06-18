@@ -47,9 +47,9 @@ $sbt.addEventListener('click', (e) => {
     })
     .then((response) => response.json())
     .then((data) => {
-        console.log("Success:", data);
+        // console.log("Success:", data);
         if(data.value == 1) {
-            console.log(data.value)
+            // console.log(data.value)
             window.location.replace("/welcome");
         }else {
             $msg.innerHTML = data.msg;

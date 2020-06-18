@@ -127,7 +127,7 @@ function startLoadingAnimation() {
 
 function checkForXSS(input) {
     const xss = validateXSS(input);
-    console.log(xss);
+    // console.log(xss);
     if(xss != 0) {
         $message.textContent = 'Please stop messing with us!';
         return true;

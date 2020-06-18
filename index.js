@@ -54,14 +54,7 @@ function pickRandomQuotes(n) {
 
 
 
-function loadInitialQuotes() {
-    const initQuotes = require('./assets/quotes.json');
-    initQuotes.forEach(quote => {
-        dbNewQuotes.insert(quote).then(createdQuote => {
-            console.log(createdQuote);
-        });
-    });
-}
+
 
 
 
