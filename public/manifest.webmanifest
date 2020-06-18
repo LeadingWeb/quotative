@@ -4,6 +4,7 @@
     "start_url": "/",
     "display": "standalone",
     "background_color": "#f7f7f7",
+    "theme_color": "#f7f7f7",
     "description": "Share your idea with the world or, swipe left or right to give your opinion on the quotes of others!",
     "icons": [
         {

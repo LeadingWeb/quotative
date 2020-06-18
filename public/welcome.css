@@ -1,17 +1,33 @@
-.wrapper {
-    height: 100%;
-}
+body {
 
-#hi{
-    font-size: 4rem;
-    font-family: 'Anton', sans-serif;
+}
+.wrapper {
+    /* height: 100%; */
+    box-sizing: border-box;
+    padding: 10px;
     display: block;
+    width: 90%;
+    height: 100%;
+    margin: 0 auto;
+}
+h1{
+    position: initial;
+    font-size: 1rem;
+    margin-bottom: 15px;
+    width: 70%;
+    overflow-wrap: break-word;
+}
+#hi{
+    font-size: 3rem;
+    font-family: 'Anton', sans-serif;
+    display: flex;
+
 }
 .simple-p{
     letter-spacing: 0.3rem;
     font-size: 1.4rem;
-    position: relative;
-    top: 10%;
+    /* position: relative;
+    top: 10%; */
 
 }
 #start-app{

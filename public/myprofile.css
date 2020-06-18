@@ -20,11 +20,15 @@ h1 {
     text-transform: lowercase;
     letter-spacing: 0.9rem;
 
+    overflow-wrap: break-word;
+
 }
 #hi{
-    font-size: 4rem;
+    font-size: 3rem;
     font-family: 'Anton', sans-serif;
     display: block;
+    overflow-wrap: break-word;
+
 }
 
 
