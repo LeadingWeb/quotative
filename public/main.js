@@ -8,7 +8,7 @@ let username, name;
     document.querySelector('html').scrollTop = window.scrollY;
 })();
 document.querySelector('body').addEventListener('overflow', (e) => {
-    console.log('scrollig' + e);
+    // console.log('scrollig' + e);
 })
 
 window.addEventListener('load', (e) => {

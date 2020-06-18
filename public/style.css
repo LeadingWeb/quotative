@@ -96,6 +96,33 @@ body{
 }
 
 
+button {
+    font-size: 1.2rem;
+    padding: 7px;
+
+    border-top-right-radius: 7%;
+    border: none;
+    border-top: 0.5px solid #3f3f44;
+    border-right: 0.5px solid #3f3f44;
+    line-height: 1.7rem;
+
+    background: #f7f7f7;
+    text-transform: lowercase;
+    letter-spacing: 0.9rem;
+
+    margin-top: 20px;
+    box-shadow: 2px 2px 2px #3f3f4411;
+    transition: 0.5s ease-in-out;
+}
+button:active{
+    background: #3f3f44;
+    color: #f7f7f7;
+    box-shadow: -2px -2px -2px #3f3f4433;
+}
+
+
+
+
 /*animation*/
 
 @keyframes swipe-right{
