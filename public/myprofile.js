@@ -60,7 +60,7 @@ const perPage = 10;
     libaryLi = [];
     libaryPagesMax = Math.ceil(myQuotes.length / 10);
     if(myLibary.length == 0) {
-
+        
     }else if(myLibary.length <= 10 && myLibary.length > 0) {
         for(let i = 0; i < 10; i++) {
             quoteActivePage = 0;
@@ -118,10 +118,11 @@ let XSSTries = 0;
 $sbt.addEventListener('click', (e) => {
     e.preventDefault();
     const quote = $quote.value;
+    console.log(quote);
     if(validateXSS(quote) != 0) {
         if(XSSTries > 5) {
             setTimeout(() => {
-
+                
             }, XSSTries * 1000);
         }
         console.log('XSS!!')
@@ -132,45 +133,46 @@ $sbt.addEventListener('click', (e) => {
         $message.textContent = 'Pleas use at least 6 letters';
     } else {
         $message.textContent = '';
-        const data = {quote: quote};
-    
-    fetch("/post-quote", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-    })
-    .then((response) => response.json())
-    .then((data) => {
-        console.log("Success:", data);
+        const data = {quote};
+        console.log(data);
         
-        async function loadMyQuotes() {
-            const res = await fetch('/my-quotes');
-            myQuotes = await res.json();
+        fetch("/post-quote", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log("Success:", data);
             
-            for(let i = 0; i < myQuotes.length; i++) {
-                drawQoute(myQuotes[i].quote);
+            async function loadMyQuotes() {
+                const res = await fetch('/my-quotes');
+                myQuotes = await res.json();
+                
+                for(let i = 0; i < myQuotes.length; i++) {
+                    drawQoute(myQuotes[i].quote);
+                }
+                
+                //console.log(quotesLi);
+                
+                //console.log(myQuotes);
+                $quote.value = '';
+                
+                
+                startLoadingAnimation();
             }
             
-            //console.log(quotesLi);
-            
-            //console.log(myQuotes);
-            $quote.value = '';
             
             
-            startLoadingAnimation();
-        }
+            loadMyQuotes();
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+        });
         
         
-        
-        loadMyQuotes();
-    })
-    .catch((error) => {
-        console.error("Error:", error);
-    });
-
-
     }
     
     
@@ -193,7 +195,7 @@ function drawLibary(quote, author) {
         $newQuoteLi.className = 'libary-li';
         libaryLi.push($newQuoteLi);
         $libary.appendChild($newQuoteLi);
-
+        
     }
     
     
@@ -219,7 +221,7 @@ function loadNextTenQuotes() {
     
     if(quoteActivePage == 0) {
         for(let i = 0; i < 10; i++) {
-
+            
             
             drawQoute(myQuotes[i].quote);
             
@@ -256,7 +258,7 @@ function loadNextTenQuotes() {
 function loadNextTenLibary() {
     if(libaryActivePage == 0) {
         for(let i = 0; i < 10; i++) {
-
+            
             
             drawLibary(myLibary[i].quote, myLibary[i].author);
             
@@ -336,7 +338,7 @@ function startLogoutAnimation() {
     $logout.appendChild($btn);
     $username.appendChild($logout);
     logoutEl = $logout;
-
+    
     $btn.addEventListener('click', (e) => {
         deleteAllCookies(window);
         window.location.replace("/login");

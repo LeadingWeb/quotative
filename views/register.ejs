@@ -3,14 +3,15 @@
     
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Swipe Test</title>
+    <title>QUOTATIVE</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="manifest.webmanifest">
-
+    
     <script src="./assets/validation.js"></script>
     <script src="./assets/Bubble.js"></script>
-
+    <meta name="theme-color" content="#f7f7f7"/>
+    
     <script src="./register_sw.js"></script>
 </head>
 
@@ -19,7 +20,7 @@
     <div class="wrapper">
         
         <h1>Register.</h1>
-
+        
         
         
         <form action="" method="post">
@@ -28,7 +29,7 @@
             
             <label for="name">Name</label>
             <input type="text" name="name" id="name" required minlength="4" maxlength="15">
-
+            
             <label for="email">Email</label>
             <input type="email" name="email" id="email" required minlength="7">
             
@@ -50,8 +51,10 @@
         <p id="change">If you already have an account, please <a href="/login">log in</a></p>
         
     </div>
+    <noscript>
+        Your browser does not support JavaScript!
+    </noscript>
     
-
     <script src="register.js" defer></script>
     
 </body>

@@ -3,10 +3,12 @@
     
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Swipe Test</title>
+    <title>QUOTATIVE</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="manifest.webmanifest">
+    
+    <meta name="theme-color" content="#f7f7f7"/>
     <script src="./register_sw.js"></script>
 </head>
 
@@ -17,12 +19,12 @@
         <h1>Login.</h1>
         
         <form action="/login" method="post">
-
+            
             <p id="new-user-msg"></p>
-
+            
             <label for="email">Email</label>
             <input type="email" name="email" id="email" required>
-                  
+            
             
             
             <label for="password">Password</label>
@@ -37,7 +39,9 @@
         
     </div>
     
-
+    <noscript>
+        Your browser does not support JavaScript!
+    </noscript>
     <script src="login.js" defer></script>
     
 </body>

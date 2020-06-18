@@ -9,13 +9,15 @@
     <title>welcome!</title>
     <meta name="description" content="">
     <meta 
-     name='viewport' 
-     content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'/>
+    name='viewport' 
+    content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'/>
     <script src="./assets/deleteCookies.js"></script>
     <link rel="manifest" href="manifest.webmanifest">
+    
+    <meta name="theme-color" content="#f7f7f7"/>
     <script src="./assets/Bubble.js"></script>
     <script src="./assets/validation.js"></script>
-
+    
     <script src="./register_sw.js"></script>
 </head>
 
@@ -25,7 +27,7 @@
         
         <h1><span id="hi"><%= username %></span> Hi <%= name %>!</h1>
         <span class="back">&lt;</span>
-
+        
         <form action="" id="post-form">
             <h3>share an idea.</h3>
             <textarea name="post" id="post" cols="30" rows="10"></textarea>
@@ -34,31 +36,33 @@
             
         </form>
         
-
+        
         <div class="myquotes">
-
+            
             <h3>My Quotes</h3>
-
+            
             <ul id="myquotes">
                 
             </ul>
         </div>
-
         
-
+        
+        
         <div class="libary">
-
+            
             <h3>My Libary</h3>
-
+            
             <ul id="libary">
-        
+                
             </ul>
         </div>
         
         <span class="back">&lt;</span>
     </div>
+    <noscript>
+        Your browser does not support JavaScript!
+    </noscript>
     
-
     <script src="myprofile.js" defer></script>
     
 </body>

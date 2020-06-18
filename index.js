@@ -461,21 +461,7 @@ app.post('/swipe', (req, res) => {
         })
         
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+  
     
 });
 
@@ -1016,7 +1002,7 @@ app.get('/my-libary', (req, res) => {
 
 app.post('/post-quote', (req, res) => {
     let theQuote = req.body.quote;
-    
+    console.log(theQuote); 
     //console.log(like);
     
     let cookieNames = Object.keys(req.cookies);
@@ -1069,7 +1055,7 @@ app.post('/post-quote', (req, res) => {
                         author: user,
                         like: arrLikes,
                         date: new Date(),
-                        quote: theQuote
+                        text: theQuote
                     };
                     let newUserQuotes;
                     

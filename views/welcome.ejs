@@ -13,8 +13,9 @@
     name='viewport' 
     content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'/>
     <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#f7f7f7"/>
     <script src="./assets/Bubble.js"></script>
-
+    
     <script src="./register_sw.js"></script>
 </head>
 
@@ -25,21 +26,23 @@
         <h1><span id="hi">feed your brain.</span> Hi <%= name %>!</h1>
         <p class="simple-p">
             Discover the world of ideas, and even leave your own footprints <br>
-
+            
             <br>
             Swipe Right if you like an idea or swipe left if you don't. <br>
             <br>
-
+            
             To add the quote to your libary, simply swipe up! <br>
             <br>
             <span id="start-app">&gt</span>
-
+            
         </p>
         
         
     </div>
+    <noscript>
+        Your browser does not support JavaScript!
+    </noscript>
     
-
     <script src="welcome.js" defer></script>
     
 </body>
